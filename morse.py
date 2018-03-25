@@ -39,6 +39,7 @@ class Node:
 
 root = Node();
 
+#creates the tree that holds the dictionary
 for letter in d:
 	node = root;
 	for c in d.get(letter, " "):
@@ -57,29 +58,37 @@ for letter in d:
 	node.letter = letter;
 
 
-
+#a function that finds the morse representation of a letter
 def findLetter(s):
 	ret = "";
 	node = root;
 	for c in s:
 		if c =='-':
-			node = node.r;
+			if node.r == None:
+				return '?';
+			else:
+				node = node.r;
 		if c == '.':
-		    node = node.l;
+			if node.l == None:
+				return '?';
+			else:
+		    	 node = node.l;
+	if node.letter == None:
+		return '?';
 	ret = ret + node.letter;
 	return ret;
 
 
 
-#code for reading and translating from english
+#code for reading and translating 
 bool = True;
 while(bool):
 	s = raw_input("type your message: ");
 	if s == 'exit':
 		bool = False;
 	t = "";
-	if s[:2] == 'M:':
-		splits = s[2:].split(' ');
+	if s[0] == '.' or s[0] == '-':
+		splits = s.split(' ');
 		for s in splits:
 			t = t + findLetter(s);
 	else:
@@ -87,5 +96,5 @@ while(bool):
 			t = t + d.get(c, '?') + '  ';
 
 	print(t);
-exit();
+exit(1);
 
