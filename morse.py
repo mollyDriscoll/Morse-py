@@ -1,10 +1,6 @@
-bool = True;
-while(bool):
-	s = raw_input("type your message: ");
-	if s == 'exit':
-		bool = False;
-	d = {
-	'a' :'..-',
+#dictionary
+d = {
+	'a' :'.-',
 	'b' :'-...',
 	'c' :'-.-.',
 	'd' :'-..',
@@ -34,6 +30,18 @@ while(bool):
 	' ' : '   ',
 	}
 
+
+for letter in d:
+	print(letter);
+
+
+
+#code for reading and translating from english
+bool = True;
+while(bool):
+	s = raw_input("type your message: ");
+	if s == 'exit':
+		bool = False;
 	t = "";
 	for c in s:
 		t = t + d.get(c, '?') + '  ';
