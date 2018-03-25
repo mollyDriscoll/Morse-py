@@ -30,9 +30,44 @@ d = {
 	' ' : '   ',
 	}
 
+#node class
+class Node:
+	l = None
+	r = None
+	letter = None	
+
+
+root = Node();
 
 for letter in d:
-	print(letter);
+	node = root;
+	for c in d.get(letter, " "):
+		if c == '-':
+			if node.r == None:
+				node.r = Node();
+				node = node.r
+			else:
+				node = node.r;
+		if c == '.':
+			if node.l == None:
+				node.l = Node();
+				node = node.l
+			else:
+				node = node.l;
+	node.letter = letter;
+
+
+
+def findLetter(s):
+	ret = "";
+	node = root;
+	for c in s:
+		if c =='-':
+			node = node.r;
+		if c == '.':
+		    node = node.l;
+	ret = ret + node.letter;
+	return ret;
 
 
 
@@ -43,10 +78,14 @@ while(bool):
 	if s == 'exit':
 		bool = False;
 	t = "";
-	for c in s:
-		t = t + d.get(c, '?') + '  ';
+	if s[:2] == 'M:':
+		splits = s[2:].split(' ');
+		for s in splits:
+			t = t + findLetter(s);
+	else:
+		for c in s:
+			t = t + d.get(c, '?') + '  ';
 
 	print(t);
-
 exit();
 
